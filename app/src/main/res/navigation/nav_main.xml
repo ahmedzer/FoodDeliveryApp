@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/fragmentRestaurantList">
+
+    <fragment
+        android:id="@+id/fragmentRestaurantList"
+        android:name="com.example.fooddeliveryapp.Fragments.FragmentRestaurantList"
+        android:label="fragment_restaurant_list"
+        tools:layout="@layout/fragment_restaurant_list" >
+        <action
+            android:id="@+id/action_fragmentRestaurantList_to_fragmentTest"
+            app:destination="@id/fragmentTest" />
+        <action
+            android:id="@+id/action_fragmentRestaurantList_to_fragmentMenus"
+            app:destination="@id/fragmentMenus">
+            <argument android:name="restaurant"
+                app:argType="com.example.fooddeliveryapp.Entities.Restaurant" app:nullable="true"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTest"
+        android:name="com.example.fooddeliveryapp.Fragments.FragmentTest"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/fragmentMenus"
+        android:name="com.example.fooddeliveryapp.Fragments.FragmentMenus"
+        android:label="fragment_menus"
+        tools:layout="@layout/fragment_menus" >
+        <action
+            android:id="@+id/action_fragmentMenus_to_fragmentSignleMenu"
+            app:destination="@id/fragmentSignleMenu">
+            <argument app:nullable="true" android:name="menu"
+                app:argType="com.example.fooddeliveryapp.Entities.Menu"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSignleMenu"
+        android:name="com.example.fooddeliveryapp.Fragments.FragmentSignleMenu"
+        android:label="fragment_signle_menu"
+        tools:layout="@layout/fragment_signle_menu" />
+    <fragment
+        android:id="@+id/fragmentPanier"
+        android:name="com.example.fooddeliveryapp.Fragments.FragmentPanier"
+        android:label="fragment_panier"
+        tools:layout="@layout/fragment_panier" />
+    <action
+        android:id="@+id/action_global_fragmentPanier"
+        app:destination="@id/fragmentPanier"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+        android:id="@+id/action_global_fragmentRestaurantList"
+        app:destination="@id/fragmentRestaurantList"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+</navigation>

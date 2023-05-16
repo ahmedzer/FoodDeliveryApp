@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/fragment_restaurant_list"
+        android:enabled="true"
+        android:icon="@drawable/home_icon"
+        android:title="Home"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/fragmentPanier"
+        android:enabled="true"
+        android:icon="@drawable/panier_icon"
+        android:title="Mon Panier"
+        android:visible="true" />
+
+</menu>

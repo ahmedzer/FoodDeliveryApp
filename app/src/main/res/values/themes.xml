@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.FoodDeliveryApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FCB140</item>
+        <item name="colorPrimary">#FEA32D</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,8 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">#FFFFFF</item>
-        <item name="android:navigationBarColor">#FEA32D</item>
+        <item name="fontFamily">casual</item>
 
         <!-- Customize your theme here. -->
     </style>
+
 </resources>

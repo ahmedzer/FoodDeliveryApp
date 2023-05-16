@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_res_back"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Voulez vous vraiment supprimer ce menu de votre panier ?"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/removeFromCard"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="Oui"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/cancelRemove"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Annuler"
+        android:textAllCaps="false" />
+</LinearLayout>
