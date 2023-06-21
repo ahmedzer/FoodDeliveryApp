@@ -129,43 +129,39 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fbk_link"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:background="@drawable/fcbk" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/twit_link"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="0dp"
-            android:background="@drawable/twit" />
+            android:background="@drawable/fcbk"
+            android:backgroundTint="#7C7C7C" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/google_link"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="0dp"
-            android:background="@drawable/ggl" />
+            android:background="@drawable/ggl"
+            android:backgroundTint="#7C7C7C" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/map_link"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="0dp"
-            android:background="@drawable/map" />
+            android:background="@drawable/map"
+            android:backgroundTint="#7C7C7C" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/phone_link"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="0dp"
-            android:background="@drawable/phone" />
+            android:background="@drawable/phone"
+            android:backgroundTint="#7C7C7C" />
     </TableRow>
 
     <TextView

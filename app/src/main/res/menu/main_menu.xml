@@ -15,5 +15,17 @@
         android:icon="@drawable/panier_icon"
         android:title="Mon Panier"
         android:visible="true" />
+    <item
+        android:enabled="true"
+        android:icon="@drawable/loupe"
+        android:title="Trouver"
+        android:visible="true"/>
+
+    <item
+        android:enabled="true"
+        android:icon="@drawable/account"
+        android:title="Mon compte"
+        android:visible="true"/>
+
 
 </menu>

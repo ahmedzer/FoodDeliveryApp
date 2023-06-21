@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.fooddeliveryapp.Entities.Menu
 
 
-@Database(entities = [Menu::class,CartMenu::class], version = 2)
+@Database(entities = [Menu::class,CartMenu::class], version = 3)
 abstract class AppDataBase:RoomDatabase() {
 
 

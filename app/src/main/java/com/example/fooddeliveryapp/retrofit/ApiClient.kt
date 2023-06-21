@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.retrofit
 
+import com.example.fooddeliveryapp.Entities.Menu
 import com.example.fooddeliveryapp.cnst.url
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,6 +18,14 @@ object ApiClient {
 
     val restaurantsService:RestaurantsService by lazy {
         retrofit.create(RestaurantsService::class.java)
+    }
+
+    val menusService:MenuService by lazy {
+        retrofit.create(MenuService::class.java)
+    }
+
+    val userServices:UserServices by lazy {
+        retrofit.create(UserServices::class.java)
     }
 
 }

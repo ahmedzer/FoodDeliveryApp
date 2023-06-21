@@ -22,7 +22,7 @@ class RestaurantRepository {
                 RestaurantLiveData.postValue(restaurants)
             }
             catch (e:Exception) {
-                Log.d("User Respo error",e.message.toString())
+                Log.d("restau Respo error",e.message.toString())
             }
             finally {
                 loadingLiveData.postValue(false)
@@ -34,4 +34,5 @@ class RestaurantRepository {
     fun isLoading(): LiveData<Boolean> {
         return loadingLiveData
     }
+
 }

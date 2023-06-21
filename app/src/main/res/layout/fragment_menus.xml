@@ -20,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -161,15 +162,8 @@
                     android:layout_height="25dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="0dp"
-                    android:background="@drawable/fcbk" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/twit_link2"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/twit" />
+                    android:background="@drawable/fcbk"
+                    android:backgroundTint="#7C7C7C" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/google_link2"
@@ -177,7 +171,8 @@
                     android:layout_height="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="0dp"
-                    android:background="@drawable/ggl" />
+                    android:background="@drawable/ggl"
+                    android:backgroundTint="#7C7C7C" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/map_link2"
@@ -185,7 +180,8 @@
                     android:layout_height="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="0dp"
-                    android:background="@drawable/map" />
+                    android:background="@drawable/map"
+                    android:backgroundTint="#7C7C7C" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/phone_link2"
@@ -193,8 +189,19 @@
                     android:layout_height="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="0dp"
-                    android:background="@drawable/phone" />
+                    android:background="@drawable/phone"
+                    android:backgroundTint="#7C7C7C" />
             </TableRow>
+
+            <Button
+                android:id="@+id/rate_menu"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Évaluer ce restaurant"
+                android:textAllCaps="false"
+                android:textSize="12sp" />
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

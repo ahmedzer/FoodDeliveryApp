@@ -15,14 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.Adapters.RestaurantAdapter
 import com.example.fooddeliveryapp.Entities.Restaurant
 import com.example.fooddeliveryapp.R
-import com.example.fooddeliveryapp.retrofit.Endpoint
+
 import com.example.fooddeliveryapp.viewmodel.RestaurantListViewModel
+import com.example.fooddeliveryapp.viewmodel.UsersViewModel
 import kotlinx.coroutines.*
 
 
 class FragmentRestaurantList : Fragment() {
 
     lateinit var restaurantVM:RestaurantListViewModel
+    public lateinit var userVM:UsersViewModel
     lateinit var restaurantRecyclerView:RecyclerView
     lateinit var pBar:ProgressBar
     lateinit var restaurantListAdapter:RestaurantAdapter
@@ -41,11 +43,13 @@ class FragmentRestaurantList : Fragment() {
         pBar = requireActivity().findViewById<ProgressBar>(R.id.progressBar)
 
         restaurantVM = ViewModelProvider(requireActivity()).get(RestaurantListViewModel::class.java)
+        userVM = ViewModelProvider(requireActivity()).get(UsersViewModel::class.java)
 
         restaurantRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.VERTICAL,false)
 
-        restaurantListAdapter = RestaurantAdapter(requireContext(), findNavController())
+        restaurantListAdapter = RestaurantAdapter(requireContext(), findNavController(),userVM)
+        restaurantListAdapter.setLifecycleOwner(viewLifecycleOwner)
         restaurantRecyclerView.adapter = restaurantListAdapter
 
 

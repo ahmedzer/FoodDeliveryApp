@@ -12,12 +12,16 @@
         tools:layout="@layout/fragment_restaurant_list" >
         <action
             android:id="@+id/action_fragmentRestaurantList_to_fragmentTest"
-            app:destination="@id/fragmentTest" />
+            app:destination="@id/fragmentTest"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_fragmentRestaurantList_to_fragmentMenus"
-            app:destination="@id/fragmentMenus">
-            <argument android:name="restaurant"
-                app:argType="com.example.fooddeliveryapp.Entities.Restaurant" app:nullable="true"/>
+            app:destination="@id/fragmentMenus"
+            app:launchSingleTop="true">
+            <argument
+                android:name="restaurant"
+                app:argType="com.example.fooddeliveryapp.Entities.Restaurant"
+                app:nullable="true" />
         </action>
     </fragment>
     <fragment
@@ -32,9 +36,12 @@
         tools:layout="@layout/fragment_menus" >
         <action
             android:id="@+id/action_fragmentMenus_to_fragmentSignleMenu"
-            app:destination="@id/fragmentSignleMenu">
-            <argument app:nullable="true" android:name="menu"
-                app:argType="com.example.fooddeliveryapp.Entities.Menu"/>
+            app:destination="@id/fragmentSignleMenu"
+            app:launchSingleTop="true">
+            <argument
+                android:name="menu"
+                app:argType="com.example.fooddeliveryapp.Entities.Menu"
+                app:nullable="true" />
         </action>
     </fragment>
     <fragment
@@ -52,6 +59,7 @@
         app:destination="@id/fragmentPanier"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     <action
@@ -59,6 +67,7 @@
         app:destination="@id/fragmentRestaurantList"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@animator/nav_default_exit_anim"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 </navigation>

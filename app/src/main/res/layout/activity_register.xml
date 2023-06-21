@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Auth.LogIn">
+    tools:context=".Auth.Register">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="393dp"
-        android:layout_height="239dp"
+        android:layout_height="150dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +55,19 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/editTextTextUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_back"
+            android:ems="10"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:hint="Nom d'utilisateur"
+            android:inputType="text"
+            android:textSize="14sp" />
+
+        <EditText
             android:id="@+id/editTextTextEmailAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,13 +93,26 @@
             android:inputType="textPassword"
             android:textSize="14sp" />
 
+        <EditText
+            android:id="@+id/editTextTextPassword2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_back"
+            android:ems="10"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:hint="Confirmer le mot de passe"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_back"
             android:fontFamily="casual"
-            android:text="Se connecter"
+            android:text="S'inscrire"
             android:textAllCaps="false"
             android:textSize="14sp" />
 
@@ -108,7 +134,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/facebook_log"
-                android:layout_width="26dp"
+                android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/fcbk" />
 
@@ -129,12 +155,12 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnReg"
+        android:id="@+id/logBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_button_back"
         android:fontFamily="casual"
-        android:text="S'inscrire"
+        android:text="Se connecter"
         android:textAllCaps="false"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

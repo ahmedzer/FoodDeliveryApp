@@ -15,5 +15,5 @@ data class Menu(@PrimaryKey(autoGenerate = true)
                 val descriptionMenu:String,
                 val prixMenu:Double,
                 val typeMenu:String,
-                val menuImage:Int,
-                val ratingMenu:Double):java.io.Serializable
+                val menuImage:String,
+               ):java.io.Serializable

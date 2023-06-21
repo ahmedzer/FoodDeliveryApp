@@ -1,3 +1,3 @@
 package com.example.fooddeliveryapp.cnst
 
-const val url = "https://4e98-105-235-130-134.eu.ngrok.io/"
+const val url = "https://0cf2-105-235-129-211.eu.ngrok.io/"

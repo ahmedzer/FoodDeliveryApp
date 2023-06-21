@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
 import android.graphics.Color
@@ -16,16 +17,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.example.fooddeliveryapp.Auth.LogIn
 import com.example.fooddeliveryapp.DB.Dao.AppDataBase
 import com.example.fooddeliveryapp.DB.Dao.CartMenu
 import com.example.fooddeliveryapp.Entities.Menu
+import com.example.fooddeliveryapp.Entities.MenuRating
 import com.example.fooddeliveryapp.Entities.Restaurant
 import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.cnst.url
+import com.example.fooddeliveryapp.viewmodel.MenuListViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +45,7 @@ import java.util.zip.DeflaterInputStream
 class FragmentSignleMenu : Fragment() {
 
     private lateinit var appDB: AppDataBase
+    lateinit var menuVM:MenuListViewModel
 
 
     override fun onCreateView(
@@ -64,13 +68,17 @@ class FragmentSignleMenu : Fragment() {
         val menuRating = requireActivity().findViewById<TextView>(R.id.menuRate)
         val menuType = requireActivity().findViewById<TextView>(R.id.Menu_type)
         val addToCard = requireActivity().findViewById<Button>(R.id.ajouterAuPanier)
+        val evaluateBtn = requireActivity().findViewById<Button>(R.id.menu_rate)
 
         val menu: Menu = arguments?.getSerializable("menu") as Menu
+        menuVM = ViewModelProvider(requireActivity()).get(MenuListViewModel::class.java)
 
 
-        menuImg.setImageResource(menu.menuImage)
+
+
+        Glide.with(requireActivity()).load(url +menu.menuImage).into(menuImg)
         menuDescription.setText(menu.descriptionMenu)
-        menuRating.setText(menu.ratingMenu.toString())
+
         menuName.setText(menu.nomMenu)
         menuPrix.setText(menu.prixMenu.toString() + " DA")
         menuType.setText(menu.typeMenu)
@@ -94,6 +102,30 @@ class FragmentSignleMenu : Fragment() {
             else {
                 showDeleteDialog(menu)
             }
+        }
+        evaluateBtn.setOnClickListener {
+            if(checkUserAuth()) {
+                showRatingDialog(menu.id_restaurant,menu.id_menu)
+            }
+            else {
+                val intnt = Intent(requireContext(), LogIn::class.java)
+                startActivity(intnt)
+            }
+        }
+
+        /////////////////// get evaluation
+        menuVM.getMenuRating(menu.id_menu,menu.id_restaurant).observe(requireActivity()){
+            var avgRating:Int = 0
+            for(x in it) {
+                avgRating = avgRating+x.rating
+            }
+            if(it.size!=0) {
+                avgRating = avgRating/it.size
+            }
+            else{
+                avgRating = 0
+            }
+            menuRating.setText(avgRating.toString())
         }
     }
 
@@ -173,14 +205,22 @@ class FragmentSignleMenu : Fragment() {
         val addBtn = dialog.findViewById<Button>(R.id.confirm_add)
         val cancelBtn = dialog.findViewById<Button>(R.id.cancel_add)
 
+
         addBtn.setOnClickListener {
 
             if(!quantityInput.text.toString().equals("")) {
                 val qte = quantityInput.text.toString().toInt()
                 if(qte!=0) {
                     val CartMenu = CartMenu(menu.id_menu,menu.id_restaurant,menu.nomMenu,qte,menu.prixMenu)
-                    addMenuToCard(CartMenu)
-                    dialog.dismiss()
+                    if(restaurantValide(menu.id_restaurant)) {
+                        addMenuToCard(CartMenu)
+                        dialog.dismiss()
+                    }
+                    else {
+                        Toast.makeText(dialog.context,"Votre panier contient une commande d'un autre restaurant," +
+                                " pour ajouter ce menu valider l'ancien panier ou videz-le",Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                    }
                 }
                 else {
                     requireActivity().runOnUiThread {
@@ -221,6 +261,64 @@ class FragmentSignleMenu : Fragment() {
             dialog.dismiss()
         }
         dialog.show()
+    }
+
+    fun getUserId():Int {//recuperer le user_id sauvegardé
+        val sharedPrf = requireContext().getSharedPreferences("Auth", Context.MODE_PRIVATE)
+        val uid  = sharedPrf.getInt("userId",-1)
+        return uid
+    }
+
+    fun checkUserAuth():Boolean {//verifier si le user est authentifié
+        val sharedPrf = requireContext().getSharedPreferences("Auth", Context.MODE_PRIVATE)
+        val editor = sharedPrf.edit()
+        val auth = sharedPrf.getBoolean("auth",false)
+        return auth
+    }
+
+
+    fun showRatingDialog(id_rest:Int,id_menu: Int) {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_rating_res)
+
+
+        val rateBar = dialog.findViewById<RatingBar>(R.id.ratingBar)
+        val submitBut = dialog.findViewById<Button>(R.id.rate_but)
+
+        submitBut.setOnClickListener {
+            val rating = rateBar.rating.toInt()
+            val uid = getUserId()
+
+            val menuRating = MenuRating(uid,id_rest,id_menu,rating)
+            //inserer l'evaluation
+            menuVM.insertMenuRating(menuRating)
+
+            menuVM._insertMenuRatingStatus.observe(requireActivity()){
+                if(it.isSuccess) {//insertiona avec succès
+                    Toast.makeText(requireContext(),"Merci pour votre évaluation ",Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                }
+                else {//erreur
+                    Toast.makeText(requireContext(),it.exceptionOrNull()!!.message.toString(),Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        //afficher le dialogue
+        dialog.show()
+    }
+
+    fun restaurantValide(id_rest: Int):Boolean{
+        val cartMenus = appDB.getMenuCardDao().getAllCartMenus()
+        val cartMenuAL = ArrayList(cartMenus)
+
+        for(x in cartMenuAL) {
+            if(x.id_rest!=id_rest) {
+                return false
+            }
+        }
+        return true
     }
 
 }
